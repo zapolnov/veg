@@ -1,0 +1,15 @@
+:name: veg
+
+= {name}
+
+|====
+| link:https://github.com/cppfw/{name}/releases[image:https://img.shields.io/github/tag/cppfw/{name}.svg[releases]] | link:https://github.com/cppfw/{name}/actions[image:https://github.com/cppfw/{name}/workflows/ci/badge.svg[ci status]] | link:https://codecov.io/gh/cppfw/svgren[image:https://codecov.io/gh/cppfw/svgren/branch/master/graph/badge.svg?token=vwqhr1CujV[codecov.io]]
+|====
+
+Vector graphics library in C++.
+
+
+**{name}** uses **link:http://github.com/cppfw/agg[AGG]** to render graphics.
+
+= Installation and Tutorials
+Read link:wiki/main.adoc[WiKi] for installation instructions and tutorials.
