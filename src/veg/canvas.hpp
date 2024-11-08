@@ -35,8 +35,6 @@ SOFTWARE.
 #include <r4/matrix.hpp>
 #include <r4/rectangle.hpp>
 #include <rasterimage/image.hpp>
-#include <svgdom/elements/gradients.hpp>
-#include <svgdom/elements/styleable.hpp>
 #include <utki/config.hpp>
 
 #include "config.hpp"
