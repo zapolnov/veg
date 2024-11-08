@@ -1,0 +1,9 @@
+Name: veg   # human-readable name
+Description: Vector graphics C++ library # human-readable description
+Version: $(version)
+URL: https://github.com/cppfw/veg
+Requires:
+Conflicts:
+Libs: -veg
+Libs.private:
+Cflags:
