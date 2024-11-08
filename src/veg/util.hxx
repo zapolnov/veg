@@ -1,6 +1,7 @@
-MIT License
+/*
+The MIT License (MIT)
 
-Copyright (c) 2024-2024 Ivan Gagis <igagis@gmail.com>
+Copyright (c) 2015-2024 Ivan Gagis <igagis@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +20,24 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+*/
+
+/* ================ LICENSE END ================ */
+
+#pragma once
+
+#include <r4/vector.hpp>
+
+#include "config.hpp"
+
+namespace veg {
+
+// return angle between x axis and a vector
+inline real get_angle(const r4::vector2<real>& v)
+{
+	using std::atan2;
+	return atan2(v.y(), v.x());
+}
+
+} // namespace veg
