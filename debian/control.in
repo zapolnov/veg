@@ -36,7 +36,7 @@ Package: libveg-dev
 Section: libdevel
 Architecture: any
 Depends: libveg$(soname) (= ${binary:Version}), ${misc:Depends},
-		libsvgdom-dev, libr4-dev
+		libr4-dev, librasterimage-dev
 Suggests: libveg-doc
 Description: cross-platform C++ vector graphics library.
  Vector graphics library.
