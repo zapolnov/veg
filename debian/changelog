@@ -1,3 +1,9 @@
+libveg (0.1.1) unstable; urgency=medium
+
+  * initial release
+
+ -- Ivan Gagis <igagis@gmail.com>  Fri, 08 Nov 2024 16:23:16 +0200
+
 libveg (0.1.0) stable; urgency=low
 
   * Initial release
