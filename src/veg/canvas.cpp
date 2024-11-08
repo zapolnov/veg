@@ -66,7 +66,7 @@ canvas::canvas(const r4::vector2<unsigned>& dims) :
 {
 #if VEG_BACKEND == VEG_BACKEND_CAIRO
 	if (!this->cr) {
-		throw std::runtime_error("svgren::canvas::canvas(): could not create cairo context");
+		throw std::runtime_error("veg::canvas::canvas(): could not create cairo context");
 	}
 #elif VEG_BACKEND == VEG_BACKEND_AGG
 	// push main drawing surface to group stack

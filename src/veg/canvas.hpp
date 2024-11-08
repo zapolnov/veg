@@ -107,7 +107,7 @@ private:
 		cairo_surface_wrapper(unsigned width, unsigned height, decltype(pixels)::value_type* buffer)
 		{
 			if (width == 0 || height == 0) {
-				throw std::invalid_argument("svgren::canvas::canvas(): width or height argument is zero");
+				throw std::invalid_argument("veg::canvas::canvas(): width or height argument is zero");
 			}
 			int stride = int(width) * int(sizeof(uint32_t)); // 32 bits per pixel
 			this->surface = cairo_image_surface_create_for_data(
@@ -119,7 +119,7 @@ private:
 				stride
 			);
 			if (!this->surface) {
-				throw std::runtime_error("svgren::canvas::canvas(): could not create cairo surface");
+				throw std::runtime_error("veg::canvas::canvas(): could not create cairo surface");
 			}
 		}
 

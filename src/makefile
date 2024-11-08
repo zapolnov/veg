@@ -11,11 +11,11 @@ this_srcs := $(call prorab-src-dir,.)
 
 $(eval $(call prorab-config, ../config))
 
-ifeq ($(this_svgren_backend),agg)
+ifeq ($(this_veg_backend),agg)
     # NOTE: there is no pkg-config in conan environment, so do not use pkg-config here
     # but specify the linked library directly
     this_ldlibs += -lantigrain
-else ifeq ($(this_svgren_backend),cairo)
+else ifeq ($(this_veg_backend),cairo)
     ifeq ($(os),windows)
         this_cxxflags += `pkg-config --cflags cairo`
     endif
