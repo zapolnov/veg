@@ -731,7 +731,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\tests\unit\**\*.cpp" />
+    <ClCompile Include="..\..\tests\unit\src\**\*.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
