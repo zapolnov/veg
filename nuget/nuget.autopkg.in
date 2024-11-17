@@ -18,9 +18,9 @@ nuget{
 		title: C++ vector graphics library;
 		authors: {Ivan Gagis};
 		owners: {Ivan Gagis};
-		licenseUrl: "https://raw.githubusercontent.com/cppfw/veg/master/LICENSE";
+		licenseUrl: "https://raw.githubusercontent.com/cppfw/veg/main/LICENSE";
 		projectUrl: "https://github.com/cppfw/veg";
-		iconUrl: "https://github.com/cppfw/veg/blob/master/logo.svg";
+		iconUrl: "https://github.com/cppfw/veg/blob/main/logo.svg";
 		requireLicenseAcceptance:false;
 		summary: C++ vector graphics library;
 
