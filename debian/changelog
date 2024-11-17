@@ -1,3 +1,9 @@
+libveg (0.1.2) unstable; urgency=medium
+
+  * conan: rebuild
+
+ -- Ivan Gagis <igagis@gmail.com>  Sun, 17 Nov 2024 23:14:48 +0200
+
 libveg (0.1.1) unstable; urgency=medium
 
   * initial release
