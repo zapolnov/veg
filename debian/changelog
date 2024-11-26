@@ -1,3 +1,9 @@
+libveg (0.1.3) unstable; urgency=medium
+
+  * vcpkgize
+
+ -- Ivan Gagis <igagis@gmail.com>  Tue, 26 Nov 2024 21:02:40 +0200
+
 libveg (0.1.2) unstable; urgency=medium
 
   * conan: rebuild
