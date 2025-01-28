@@ -1,3 +1,9 @@
+libveg (0.1.5) unstable; urgency=medium
+
+  * emscripten
+
+ -- Ivan Gagis <igagis@gmail.com>  Wed, 29 Jan 2025 01:04:22 +0200
+
 libveg (0.1.4) unstable; urgency=medium
 
   * conan: macos
