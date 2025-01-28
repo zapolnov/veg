@@ -37,8 +37,8 @@ SOFTWARE.
 
 #if VEG_BACKEND == VEG_BACKEND_CAIRO
 #elif VEG_BACKEND == VEG_BACKEND_AGG
-#	include <agg/agg_conv_curve.h>
 #	include <agg/agg_bounding_rect.h>
+#	include <agg/agg_conv_curve.h>
 #	include <agg/agg_conv_dash.h>
 
 using agg_curve3_type = agg::curve3_div;
@@ -48,8 +48,8 @@ using agg_curve4_type = agg::curve4_div;
 using namespace veg;
 
 namespace {
-// approximate 90 degree arc with bezier curve which matches the arc at 45 degree point
-// and has the same tangent as an arc at 45 degree point
+// approximate 90 degree arc with bezier curve which matches the arc at 45
+// degree point and has the same tangent as an arc at 45 degree point
 using std::sqrt;
 const real arc_bezier_param = real(4 * (sqrt(2) - 1) / 3);
 } // namespace
@@ -74,7 +74,8 @@ canvas::canvas(const r4::vector2<unsigned>& dims) :
 #endif
 }
 
-// NOLINTNEXTLINE(modernize-use-equals-default, "destructor is not trivial in some build configs")
+// NOLINTNEXTLINE(modernize-use-equals-default, "destructor is not trivial in
+// some build configs")
 canvas::~canvas()
 {
 #if VEG_BACKEND == VEG_BACKEND_CAIRO
@@ -133,10 +134,10 @@ void canvas::agg_path_to_polyline() const
 	}
 
 	agg::conv_curve<decltype(this->path), agg_curve3_type, agg_curve4_type> curve(
-		// AGG should have had const argument for path, because path does not change,
-		// but it doesn't, so we have to use const_cast
+		// AGG should have had const argument for path, because path does not
+		// change, but it doesn't, so we have to use const_cast
 		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
-		const_cast<decltype(this->path) &>(this->path)
+		const_cast<decltype(this->path)&>(this->path)
 	);
 	curve.approximation_scale(this->approximation_scale);
 
@@ -312,9 +313,10 @@ r4::vector2<real> canvas::matrix_mul_distance(const r4::vector2<real>& v) const
 
 r4::rectangle<real> canvas::get_shape_bounding_box() const
 {
-	// According to SVG spec https://www.w3.org/TR/SVG/coords.html#ObjectBoundingBox
-	// "The bounding box is computed exclusive of any values for clipping, masking, filter effects, opacity and
-	// stroke-width"
+	// According to SVG spec
+	// https://www.w3.org/TR/SVG/coords.html#ObjectBoundingBox "The bounding box
+	// is computed exclusive of any values for clipping, masking, filter effects,
+	// opacity and stroke-width"
 
 #if VEG_BACKEND == VEG_BACKEND_CAIRO
 	backend_real x1 = 0, y1 = 0, x2 = 0, y2 = 0;
@@ -771,7 +773,8 @@ void canvas::stroke()
 
 		agg::conv_dash<decltype(this->polyline_path)> dashed_path(this->polyline_path);
 
-		// TRACE(<< "dasharray.size() = " << this->context.dash_array.size() << std::endl)
+		// TRACE(<< "dasharray.size() = " << this->context.dash_array.size() <<
+		// std::endl)
 		real dash_length = 0;
 		for (auto& d : this->context.dash_array) {
 			// TRACE(<< "dash = (" << d.first << ", " << d.second << ")" << std::endl)
@@ -782,8 +785,9 @@ void canvas::stroke()
 
 		// TRACE(<< "dash offset = " << this->context.dash_offset << std::endl)
 
-		// in case no dashes are added to the dashed_path and dash offset is non-zero the dash_start() function will
-		// hang, so call the dash_start() only after all the add_dash() calls are done
+		// in case no dashes are added to the dashed_path and dash offset is
+		// non-zero the dash_start() function will hang, so call the dash_start()
+		// only after all the add_dash() calls are done
 		if (this->context.dash_offset >= 0) {
 			dashed_path.dash_start(backend_real(this->context.dash_offset));
 		} else {
@@ -1092,7 +1096,8 @@ void move_luminance_to_alpha(image_span_type img)
 				image_type::value(1),
 				image_type::value(1),
 				image_type::value(1),
-				// we use premultiplied alpha format, so no need to multiply alpha by liminance
+				// we use premultiplied alpha format, so no need to multiply alpha
+				// by liminance
 				rasterimage::luminance(px) // assume RGBA pixel format
 			);
 		}
@@ -1143,7 +1148,8 @@ void canvas::pop_mask_and_group()
 			auto& gc = *gi;
 			auto ma = mi->a();
 
-			// multiply group color (since we use pre-multiplied pixel format) by mask alpha
+			// multiply group color (since we use pre-multiplied pixel format) by mask
+			// alpha
 			gc.comp_operation([&ma](const auto& a) {
 				return rasterimage::multiply(a, ma);
 			});
@@ -1183,7 +1189,10 @@ void canvas::set_dash_pattern(utki::span<const real> dashes, real offset)
 		ASSERT(dst == dasharray.end())
 		cairo_set_dash(this->cr, dasharray.data(), int(dasharray.size()), backend_real(offset));
 		if (cairo_status(this->cr) != CAIRO_STATUS_SUCCESS) {
-			throw std::runtime_error("cairo_set_dash() failed. Check if there was no negative values in dashes array.");
+			throw std::runtime_error(
+				"cairo_set_dash() failed. Check if there was no "
+				"negative values in dashes array."
+			);
 		}
 	}
 #elif VEG_BACKEND == VEG_BACKEND_AGG
@@ -1196,7 +1205,8 @@ void canvas::set_dash_pattern(utki::span<const real> dashes, real offset)
 	// TRACE(<< "num_repeats = " << num_repeats << std::endl)
 	this->context.dash_array.resize(dashes.size() / (3 - num_repeats));
 
-	// TRACE(<< "dash_array.size() = " << this->context.dash_array.size() << std::endl)
+	// TRACE(<< "dash_array.size() = " << this->context.dash_array.size() <<
+	// std::endl)
 
 	auto src = dashes.begin();
 	for (auto& dst : this->context.dash_array) {

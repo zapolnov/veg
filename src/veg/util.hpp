@@ -53,7 +53,8 @@ public:
 
 	/**
 	 * @brief Destroy the object.
-	 * It will set the stored matrix back to the canvas, so it becomes the canvas' current matrix again.
+	 * It will set the stored matrix back to the canvas, so it becomes the canvas'
+	 * current matrix again.
 	 */
 	~canvas_matrix_push() noexcept;
 };

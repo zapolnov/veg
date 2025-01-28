@@ -152,7 +152,8 @@ public:
 
 	/**
 	 * @brief Set gradient spread method.
-	 * Spread method is a behavior of the gradient when it reaches its final gradient stop.
+	 * Spread method is a behavior of the gradient when it reaches its final
+	 * gradient stop.
 	 */
 	void set_spread_method(gradient_spread_method spread_method);
 
@@ -207,7 +208,8 @@ class radial_gradient : public gradient
 public:
 	/**
 	 * @brief Construct radial gradient.
-	 * Radial gradient starts from a focal point and propogates radially to a destination circle.
+	 * Radial gradient starts from a focal point and propogates radially to a
+	 * destination circle.
 	 * @param f - focla point. A position of the gradients first stop.
 	 * @param c - position of the destination circle's center point.
 	 * @param r - radius of the destination circle.

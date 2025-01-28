@@ -47,14 +47,14 @@ SOFTWARE.
 #		include <cairo/cairo.h>
 #	endif
 #elif VEG_BACKEND == VEG_BACKEND_AGG
-#	include <agg/agg_rendering_buffer.h>
+#	include <agg/agg_conv_stroke.h>
+#	include <agg/agg_curves.h>
 #	include <agg/agg_pixfmt_rgba.h>
+#	include <agg/agg_rasterizer_scanline_aa.h>
 #	include <agg/agg_renderer_base.h>
 #	include <agg/agg_renderer_scanline.h>
+#	include <agg/agg_rendering_buffer.h>
 #	include <agg/agg_scanline_u.h>
-#	include <agg/agg_rasterizer_scanline_aa.h>
-#	include <agg/agg_curves.h>
-#	include <agg/agg_conv_stroke.h>
 #	include <agg/agg_span_allocator.h>
 #	include <agg/agg_span_interpolator_linear.h>
 #endif
@@ -89,8 +89,9 @@ enum class line_join {
 
 /**
  * @brief Canvas for drawing vector graphics.
- * The canvas rasterizes and draws vector graphics to an underlying raster image (the drawing surface).
- * Coordinate system is two dimensional, x-axis right, y-axis down.
+ * The canvas rasterizes and draws vector graphics to an underlying raster image
+ * (the drawing surface). Coordinate system is two dimensional, x-axis right,
+ * y-axis down.
  */
 class canvas
 {
@@ -158,7 +159,8 @@ private:
 		{}
 	};
 
-	// NOTE: the groups stack has to be std::list because agg's structures are non-moveable and non-copyable
+	// NOTE: the groups stack has to be std::list because agg's structures are
+	// non-moveable and non-copyable
 	std::list<group> group_stack;
 
 	const real approximation_scale = 10;
@@ -191,15 +193,17 @@ private:
 		real dash_offset = 0;
 		std::vector<std::pair<real, real>> dash_array;
 #endif
-		std::shared_ptr<const gradient>
-			grad; // this is needed at least to save shared pointer to gradient object to prevent its deletion
+		// this is needed at least to save shared pointer to gradient
+		// object to prevent its deletion
+		std::shared_ptr<const gradient> grad;
 	} context;
 
 	bool has_current_point() const;
 
 public:
 	/**
-	 * @brief Construct a canvas with the underlying raster image of the specified dimensions.
+	 * @brief Construct a canvas with the underlying raster image of the specified
+	 * dimensions.
 	 * @param dims - dimensions of the underlying raster image in pixels.
 	 */
 	canvas(const r4::vector2<unsigned>& dims);
@@ -328,25 +332,28 @@ public:
 
 	/**
 	 * @brief Add a line to the current shape.
-	 * Add a straight line segment to the current shape starting at current point and ending at specified absolute
-	 * coordinates. The current point is updated to the other end of the line segment.
+	 * Add a straight line segment to the current shape starting at current point
+	 * and ending at specified absolute coordinates. The current point is updated
+	 * to the other end of the line segment.
 	 * @param p - absolute coordinates of the line segment end.
 	 */
 	void line_abs(const r4::vector2<real>& p);
 
 	/**
 	 * @brief Add a line to the current shape.
-	 * Add a straight line segment to the current shape starting at current point and ending at specified coordinates
-	 * relative to the current point. The current point is updated to the other end of the line segment.
+	 * Add a straight line segment to the current shape starting at current point
+	 * and ending at specified coordinates relative to the current point. The
+	 * current point is updated to the other end of the line segment.
 	 * @param p - relative coordinates of the line segment end.
 	 */
 	void line_rel(const r4::vector2<real>& p);
 
 	/**
 	 * @brief Add a quadratic curve to the current shape.
-	 * Add a quadratic curve to the current shape. The quadratic curve is specified by the current point as start
-	 * point, one control point and an end point. Control point and an end point are specified in absolute coordinates.
-	 * The current point is updated to the end point of the curve.
+	 * Add a quadratic curve to the current shape. The quadratic curve is
+	 * specified by the current point as start point, one control point and an end
+	 * point. Control point and an end point are specified in absolute
+	 * coordinates. The current point is updated to the end point of the curve.
 	 * @param cp1 - control point of the quadratic curve.
 	 * @param ep - end point of the quadratic curve.
 	 */
@@ -357,9 +364,11 @@ public:
 
 	/**
 	 * @brief Add a quadratic curve to the current shape.
-	 * Add a quadratic curve to the current shape. The quadratic curve is specified by the current point as start
-	 * point, one control point and an end point. Control point and an end point are specified in coordinates relative
-	 * to the current point. The current point is updated to the end point of the curve.
+	 * Add a quadratic curve to the current shape. The quadratic curve is
+	 * specified by the current point as start point, one control point and an end
+	 * point. Control point and an end point are specified in coordinates relative
+	 * to the current point. The current point is updated to the end point of the
+	 * curve.
 	 * @param cp1 - control point of the quadratic curve.
 	 * @param ep - end point of the quadratic curve.
 	 */
@@ -370,9 +379,10 @@ public:
 
 	/**
 	 * @brief Add a cubic curve to the current shape.
-	 * Add a cubic curve to the current shape. The cubic curve is specified by the current point as start
-	 * point, two control points and an end point. Control points and an end point are specified in absolute
-	 * coordinates. The current point is updated to the end point of the curve.
+	 * Add a cubic curve to the current shape. The cubic curve is specified by the
+	 * current point as start point, two control points and an end point. Control
+	 * points and an end point are specified in absolute coordinates. The current
+	 * point is updated to the end point of the curve.
 	 * @param cp1 - first control point of the cubic curve.
 	 * @param cp2 - second control point of the cubic curve.
 	 * @param ep - end point of the cubic curve.
@@ -385,9 +395,10 @@ public:
 
 	/**
 	 * @brief Add a cubic curve to the current shape.
-	 * Add a cubic curve to the current shape. The cubic curve is specified by the current point as start
-	 * point, two control points and an end point. Control points and an end point are specified in coordinates relative
-	 * to the current point. The current point is updated to the end point of the curve.
+	 * Add a cubic curve to the current shape. The cubic curve is specified by the
+	 * current point as start point, two control points and an end point. Control
+	 * points and an end point are specified in coordinates relative to the
+	 * current point. The current point is updated to the end point of the curve.
 	 * @param cp1 - first control point of the cubic curve.
 	 * @param cp2 - second control point of the cubic curve.
 	 * @param ep - end point of the cubic curve.
@@ -400,8 +411,8 @@ public:
 
 	/**
 	 * @brief Add a circle arc to the current shape.
-	 * Add a circle arc to the current shape. The arc is specified by center point, radius, start angle and sweep angle.
-	 * All coordinates are absolute.
+	 * Add a circle arc to the current shape. The arc is specified by center
+	 * point, radius, start angle and sweep angle. All coordinates are absolute.
 	 * The current point is updated to the end point of the arc.
 	 * @param center - coordinates of the arc center point.
 	 * @param radius - radius of the arc.
@@ -417,14 +428,18 @@ public:
 
 	/**
 	 * @brief Add an elliptic arc to the current shape.
-	 * Add an elliptic arc to the current shape. The arc is specified by end point, ellipse's x-axis radius, ellipse's
-	 * y-axis radius, angle of the ellipse's x-axis rotation, large arc flag, sweep direction flag. All coordinates are
-	 * absolute. The current point is updated to the end point of the arc.
+	 * Add an elliptic arc to the current shape. The arc is specified by end
+	 * point, ellipse's x-axis radius, ellipse's y-axis radius, angle of the
+	 * ellipse's x-axis rotation, large arc flag, sweep direction flag. All
+	 * coordinates are absolute. The current point is updated to the end point of
+	 * the arc.
 	 * @param end_point - end point of the arc.
 	 * @param radius - x-axis and y-axis radiuses of the ellipse.
 	 * @param x_axis_rotation - rotation of the ellipse's x-axis in radians.
-	 * @param large_arc - large arc flag: true = draw large arc, flase = draw small arc.
-	 * @param sweep - sweep direction: true = clockwise, false = counter-clockwise.
+	 * @param large_arc - large arc flag: true = draw large arc, flase = draw
+	 * small arc.
+	 * @param sweep - sweep direction: true = clockwise, false =
+	 * counter-clockwise.
 	 */
 	void arc_abs(
 		const r4::vector2<real>& end_point,
@@ -436,14 +451,18 @@ public:
 
 	/**
 	 * @brief Add an elliptic arc to the current shape.
-	 * Add an elliptic arc to the current shape. The arc is specified by end point, ellipse's x-axis radius, ellipse's
-	 * y-axis radius, angle of the ellipse's x-axis rotation, large arc flag, sweep direction flag. All coordinates are
-	 * relative to the current point. The current point is updated to the end point of the arc.
+	 * Add an elliptic arc to the current shape. The arc is specified by end
+	 * point, ellipse's x-axis radius, ellipse's y-axis radius, angle of the
+	 * ellipse's x-axis rotation, large arc flag, sweep direction flag. All
+	 * coordinates are relative to the current point. The current point is updated
+	 * to the end point of the arc.
 	 * @param end_point - end point of the arc.
 	 * @param radius - x-axis and y-axis radiuses of the ellipse.
 	 * @param x_axis_rotation - rotation of the ellipse's x-axis in radians.
-	 * @param large_arc - large arc flag: true = draw large arc, flase = draw small arc.
-	 * @param sweep - sweep direction: true = clockwise, false = counter-clockwise.
+	 * @param large_arc - large arc flag: true = draw large arc, flase = draw
+	 * small arc.
+	 * @param sweep - sweep direction: true = clockwise, false =
+	 * counter-clockwise.
 	 */
 	void arc_rel(
 		const r4::vector2<real>& end_point,
@@ -455,8 +474,9 @@ public:
 
 	/**
 	 * @brief Close the path of the current shape.
-	 * Add a straight line segment to the current shape which connects the current point with the start point of the
-	 * current shape. The current point is updated to the start point of the current shape.
+	 * Add a straight line segment to the current shape which connects the current
+	 * point with the start point of the current shape. The current point is
+	 * updated to the start point of the current shape.
 	 */
 	void close_path();
 
@@ -470,7 +490,8 @@ public:
 	 * @brief Add a rectangle to the current shape.
 	 * All the coordinates are absolute.
 	 * @param rect - rectangle position and dimensions.
-	 * @param corner_radius - x-axis and y-axis radiuses of the rectangle's rounded corners.
+	 * @param corner_radius - x-axis and y-axis radiuses of the rectangle's
+	 * rounded corners.
 	 */
 	void rectangle(
 		const r4::rectangle<real>& rect, //
@@ -490,8 +511,9 @@ public:
 
 	/**
 	 * @brief Fill the current shape.
-	 * Actually performs rasterization of the current shape by filling it with the current paint source using the
-	 * current fill rule. The current shape is preserved.
+	 * Actually performs rasterization of the current shape by filling it with the
+	 * current paint source using the current fill rule. The current shape is
+	 * preserved.
 	 */
 	void fill();
 
@@ -506,8 +528,9 @@ public:
 
 	/**
 	 * @brief Stroke the current shape.
-	 * Actually performs rasterization of the current shape by stroking along the shape's path with the current paint
-	 * source using the current line cap, line join, line width and dash pattern. The current shape is preserved.
+	 * Actually performs rasterization of the current shape by stroking along the
+	 * shape's path with the current paint source using the current line cap, line
+	 * join, line width and dash pattern. The current shape is preserved.
 	 */
 	void stroke();
 
@@ -534,8 +557,9 @@ public:
 	 * The dash pattern to use for stroke operation.
 	 * Set to empty span with 0 offset for no dashing.
 	 * @param dashes - array of dash and gap lengths. If number of values is odd,
-	 *                 then the array conents is effectively repeated twice. Negative values are an error.
-	 *                 Empty list means no dashing, the stroke line will be solid.
+	 *                 then the array conents is effectively repeated twice.
+	 * Negative values are an error. Empty list means no dashing, the stroke line
+	 * will be solid.
 	 * @param offset - initial dash pattern offset. Can be negative.
 	 */
 	void set_dash_pattern(
@@ -557,26 +581,30 @@ public:
 
 	/**
 	 * @brief Push drawing group.
-	 * Creates a new drawing surface (raster image) of the same dimensions as the canvas and sets it as current drawing
-	 * surface. I.e. pushes a new group to the group stack.
+	 * Creates a new drawing surface (raster image) of the same dimensions as the
+	 * canvas and sets it as current drawing surface. I.e. pushes a new group to
+	 * the group stack.
 	 */
 	void push_group();
 
 	/**
 	 * @brief Merge current drawing surface with previous one.
-	 * Blends contents of the current drawing surface with the previous drawing surface.
-	 * The current drawing surface is discarded. The previous drawing surface is set as current.
-	 * I.e. pops a group from the groups stack.
-	 * @param opacity - blending factor from [0:1]: 1 = completely replace contents of previous drawing surface,
-	 *                  0 = do not change the previous drawing surface.
+	 * Blends contents of the current drawing surface with the previous drawing
+	 * surface. The current drawing surface is discarded. The previous drawing
+	 * surface is set as current. I.e. pops a group from the groups stack.
+	 * @param opacity - blending factor from [0:1]: 1 = completely replace
+	 * contents of previous drawing surface, 0 = do not change the previous
+	 * drawing surface.
 	 */
 	void pop_group(real opacity);
 
 	/**
 	 * @brief Pop group with mask.
-	 * Blend the previous drawing surface with the previous-previous drawing surface using current drawing surface as a
-	 * mask. The current drawing surface contents are turned into luminance values and used as per-pixel blending
-	 * factors (alpha-mask). Effectively, removes two groups from the top of the group stack.
+	 * Blend the previous drawing surface with the previous-previous drawing
+	 * surface using current drawing surface as a mask. The current drawing
+	 * surface contents are turned into luminance values and used as per-pixel
+	 * blending factors (alpha-mask). Effectively, removes two groups from the top
+	 * of the group stack.
 	 */
 	void pop_mask_and_group();
 
@@ -588,7 +616,8 @@ public:
 
 	/**
 	 * @brief Release the current drawing surface.
-	 * After this call the canvas remains in invalid state and cannot be used further.
+	 * After this call the canvas remains in invalid state and cannot be used
+	 * further.
 	 * @return raster image of the current drawing surface.
 	 */
 	image_type release();

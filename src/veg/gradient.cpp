@@ -44,7 +44,8 @@ agg::rgba to_agg_rgba(const r4::vector4<real>& rgba)
 } // namespace
 #endif
 
-// NOLINTNEXTLINE(modernize-use-equals-default, "destructor is not trivial in some build configs")
+// NOLINTNEXTLINE(modernize-use-equals-default, "destructor is not trivial in
+// some build configs")
 gradient::~gradient()
 {
 #if VEG_BACKEND == VEG_BACKEND_CAIRO
@@ -76,7 +77,8 @@ linear_gradient::linear_gradient(const r4::vector2<real>& p0, const r4::vector2<
 
 	this->local_matrix.set_identity();
 
-	// gradient needs inverse matrix, i.e. matrix which transforms screen coordinates to gradient coordiantes
+	// gradient needs inverse matrix, i.e. matrix which transforms screen
+	// coordinates to gradient coordiantes
 
 	// we need to transform the [p0, p1] line segment to [0, 1] segment on X-axis
 	// and then stretch it to color_lut_size length
@@ -107,8 +109,8 @@ radial_gradient::radial_gradient(const r4::vector2<real>& f, const r4::vector2<r
 		throw std::runtime_error("cairo_pattern_create_radial() failed");
 	}
 #elif VEG_BACKEND == VEG_BACKEND_AGG
-	// gradient parameters are stretched so that the gradient radius becomes color_lut_size,
-	// this is for optimal color picking from the color_lut
+	// gradient parameters are stretched so that the gradient radius becomes
+	// color_lut_size, this is for optimal color picking from the color_lut
 	real lut_r = decltype(gradient::lut)::color_lut_size;
 	auto rel_f = f - c;
 	auto lut_f = rel_f / r * lut_r;
@@ -118,10 +120,11 @@ radial_gradient::radial_gradient(const r4::vector2<real>& f, const r4::vector2<r
 
 	this->local_matrix.set_identity();
 
-	// gradient needs inverse matrix, i.e. matrix which transforms screen coordinates to gradient coordiantes
+	// gradient needs inverse matrix, i.e. matrix which transforms screen
+	// coordinates to gradient coordiantes
 
-	// we need to transform the gradient center to 0 point and scale it to radius of 1
-	// and then stretch it to color_lut_size
+	// we need to transform the gradient center to 0 point and scale it to radius
+	// of 1 and then stretch it to color_lut_size
 
 	this->local_matrix.scale(lut_r);
 	this->local_matrix.scale(real(1) / r);
