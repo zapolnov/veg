@@ -44,8 +44,8 @@ agg::rgba to_agg_rgba(const r4::vector4<real>& rgba)
 } // namespace
 #endif
 
-// NOLINTNEXTLINE(modernize-use-equals-default, "destructor is not trivial in
-// some build configs")
+// destructor is not trivial in some build configs
+// NOLINTNEXTLINE(modernize-use-equals-default)
 gradient::~gradient()
 {
 #if VEG_BACKEND == VEG_BACKEND_CAIRO

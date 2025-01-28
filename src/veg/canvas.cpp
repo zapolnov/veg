@@ -74,8 +74,8 @@ canvas::canvas(const r4::vector2<unsigned>& dims) :
 #endif
 }
 
-// NOLINTNEXTLINE(modernize-use-equals-default, "destructor is not trivial in
-// some build configs")
+// destructor is not trivial in some build configs
+// NOLINTNEXTLINE(modernize-use-equals-default)
 canvas::~canvas()
 {
 #if VEG_BACKEND == VEG_BACKEND_CAIRO
