@@ -1,3 +1,9 @@
+libveg (0.1.6) unstable; urgency=medium
+
+  * debian: add libantigrain-dev dep to dev package
+
+ -- Ivan Gagis <igagis@gmail.com>  Tue, 22 Apr 2025 18:15:34 +0300
+
 libveg (0.1.5) unstable; urgency=medium
 
   * emscripten
