@@ -673,7 +673,8 @@ void canvas::agg_render(agg::rasterizer_scanline_aa<>& rasterizer)
 {
 	agg::scanline_u8 scanline;
 	if (!this->context.grad) {
-		agg::renderer_scanline_aa_solid<decltype(group::renderer_base)> renderer(this->group_stack.back().renderer_base
+		agg::renderer_scanline_aa_solid<decltype(group::renderer_base)> renderer(
+			this->group_stack.back().renderer_base
 		);
 		renderer.color(this->context.color);
 		agg::render_scanlines(rasterizer, scanline, renderer);
