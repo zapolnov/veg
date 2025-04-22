@@ -1,7 +1,9 @@
 # TODO: use -O3 when https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105651 is fixed in debian bookworm
 this_cxxflags += -O2
 
-this_lint_cmd = $(prorab_lint_cmd_clang_tidy)
+# Disable lint due to recent clang-tidy finds problems in AGG. For some reason it analyses system headers.
+# TODO: enable lint when clang-tidy system headers problem is solved
+# this_lint_cmd = $(prorab_lint_cmd_clang_tidy)
 
 # WORKAROUND: on ubuntu jammy dpkg-buildpackage passes -ffat-lto-objects compilation flag
 # which is not supported by clang and clang-tidy complains about it:
