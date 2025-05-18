@@ -1,3 +1,9 @@
+libveg (0.1.7) unstable; urgency=medium
+
+  * cmake: myci
+
+ -- Ivan Gagis <igagis@gmail.com>  Sun, 18 May 2025 14:52:01 +0300
+
 libveg (0.1.6) unstable; urgency=medium
 
   * debian: add libantigrain-dev dep to dev package
