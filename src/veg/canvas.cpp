@@ -1073,7 +1073,7 @@ void canvas::pop_group(real opacity)
 			nullptr,
 			0, // x
 			0, // y
-			agg::cover_type(opacity * agg::cover_full)
+			agg::cover_type(opacity * int(agg::cover_full))
 		);
 	} else {
 		dg.renderer_base.blend_from(
