@@ -1,3 +1,9 @@
+libveg (0.1.10) unstable; urgency=medium
+
+  * add debian dbg package
+
+ -- Ivan Gagis <igagis@gmail.com>  Wed, 02 Jul 2025 01:25:28 +0300
+
 libveg (0.1.9) unstable; urgency=medium
 
   * cmake: config transient deps
