@@ -1,13 +1,17 @@
 include prorab.mk
 include prorab-test.mk
 
+$(eval $(call prorab-config, ../../config))
+
 this_name := tests
 
 this_srcs += $(call prorab-src-dir, src)
 
-$(eval $(call prorab-config, ../../config))
+this_ldlibs += -l utki$(this_dbg)
+this_ldlibs += -l tst$(this_dbg)
+this_ldlibs += -l rasterimage$(this_dbg)
 
-this_ldlibs += ../../src/out/$(c)/libveg$(dot_so) -lutki -ltst -lrasterimage
+this_ldlibs += ../../src/out/$(c)/libveg$(this_dbg)$(dot_so)
 
 this_no_install := true
 
