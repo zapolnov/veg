@@ -8,8 +8,3 @@ this_cxxflags += -g
 this_cxxflags += -fPIC
 
 this_ldlibs += -lstdc++
-
-ifeq ($(gprof), true)
-    this_cxxflags += -pg
-    this_ldflags += -pg
-endif
