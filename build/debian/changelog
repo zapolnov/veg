@@ -1,3 +1,9 @@
+libveg (0.1.11) unstable; urgency=medium
+
+  * fix dbg config
+
+ -- Ivan Gagis <igagis@gmail.com>  Wed, 02 Jul 2025 15:00:06 +0300
+
 libveg (0.1.10) unstable; urgency=medium
 
   * add debian dbg package
