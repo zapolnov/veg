@@ -1,5 +1,7 @@
 #include <veg/canvas.hpp>
 
+#include <iostream>
+
 int main(int argc, const char** argv){
     veg::canvas c({10, 20});
 
